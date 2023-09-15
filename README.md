@@ -6,13 +6,8 @@ Link: https://pan.baidu.com/s/1lI9A1fh0uU_ADdy7DdBO3Q
 Code: inav
 
 # Partial experimental results
-#
-                                                   P	   R	  AP
-          YOLOv5s	                93.65	87.78	87.36
-+ Weighted-Add-IPNH	93.30	90.12	90.51
-+ Add-IPNH	                92.37	91.04	91.44
-+ Weighted-Concat-IPNH	92.40	90.24	90.89
-+ Concat-IPNH (Our)	95.16	92.86	92.40
+
+![Uploading 781ae3006cc628e77d13de29b1ed58f.png…]()
 
 Notes: Weighted-Add-IPNH denotes the skip connections adopted the weighted fusion approaches and sum features up. Add-IPNH denotes the skip connections directly sum features up. Weighted-Concat-IPNH denotes the skip connections adopted the weighted fusion approaches and concatenated features. Concat-IPNH denotes the skip connections without weighted concatenated features.
 

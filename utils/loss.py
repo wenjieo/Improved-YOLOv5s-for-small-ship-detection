@@ -158,17 +158,8 @@ class ComputeLoss:
             BCEcls, BCEobj = FocalLoss(BCEcls, g), FocalLoss(BCEobj, g)
             # BCEcls, BCEobj = QFocalLoss(BCEcls, g), QFocalLoss(BCEobj, g) 同样可以考虑使用QFocal loss
 
-        det = model.module.model[-1] if is_parallel(model) else model.model[-1]  # Detect() module  det返回的是模型的检测头，3个检测层对应产生输出feature map
-        self.balance = {3: [4.0, 1.0, 0.4]}.get(det.nl, [4.0, 1.0, 0.25, 0.06, .02])  # P3-P7
-        # balance用来设置三个feature map对应输出的置信度损失系数(平衡三个feature map的置信度损失)
-        # 从左到右分别对应大feature map(检测小目标)到小feature map(检测大目标)
-        # 思路:  It seems that larger output layers may overfit earlier, so those numbers may need a bit of adjustment
-        #       一般来说，检测小物体的难度大一点，所以会增加大特征图的损失系数，让模型更加侧重小物体的检测
-        # 如果det.nl=3就返回[4.0, 1.0, 0.4]否则返回[4.0, 1.0, 0.25, 0.06, .02]
-        # self.balance = {3: [4.0, 1.0, 0.4], 4: [4.0, 1.0, 0.25, 0.06], 5: [4.0, 1.0, 0.25, 0.06, .02]}[det.nl]
-        # self.balance = {3: [4.0, 1.0, 0.4]}.get(det.nl, [4.0, 4.0, 1.0, 0.4])   # 更改之后的  我们的模型针对OSSD
-        # self.balance = {3: [4.0, 1.0, 0.4]}.get(det.nl, [6.0, 2.0, 0.25, 0.06])  # 更改之后的  我们的模型针对LEVIR-Ship
-        # self.balance = {3: [4.0, 1.0, 0.4]}.get(det.nl, [4.0, 2.0, 1.0, 0.25])
+        det = model.module.model[-1] if is_parallel(model) else model.model[-1]  # Detect() module  
+        self.balance = {3: [4.0, 1.0, 0.4]}.get(det.nl, [4.0, 4.0, 1.0, 0.4])   # For OSSD
         self.ssi = list(det.stride).index(16) if autobalance else 0  # stride 16 index
         self.BCEcls, self.BCEobj, self.gr, self.hyp, self.autobalance = BCEcls, BCEobj, model.gr, h, autobalance
         for k in 'na', 'nc', 'nl', 'anchors':

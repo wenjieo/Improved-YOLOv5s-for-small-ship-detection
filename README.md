@@ -13,7 +13,7 @@ Notes: Weighted-Add-IPNH denotes the skip connections adopted the weighted fusio
 # Ciation
 If you find our work useful for your research, please consider citing our paper:
 
-[Uplo@ARTICLE{10262295,
+@ARTICLE{10262295,
   author={Liu, Zhiheng and Zhang, Wenjie and Yu, Hang and Zhou, Suiping and Qi, Wenjuan and Guo, Yuru and Li, Chenyang},
   journal={IEEE Geoscience and Remote Sensing Letters}, 
   title={Improved YOLOv5s for Small Ship Detection with Optical Remote Sensing Images}, 
@@ -22,4 +22,3 @@ If you find our work useful for your research, please consider citing our paper:
   number={},
   pages={1-1},
   doi={10.1109/LGRS.2023.3319025}}
-ading IEEE Xplore Citation BibTeX Download 2023.10.10.21.49.8.bib…]()
